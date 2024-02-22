@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title> Fuel Quote Profile Information</title>
+        <link rel="stylesheet" href="websiteCSS.css" />
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="nav_logo">Home</a>
+                <ul class="nav_items">
+                    <li class="nav_item">
+                        <a href="#" class="nav_link">About</a>
+                        <a href="#" class="nav_link">Services</a>
+                        <a href="#" class="nav_link">Contact</a>
+                    </li>
+                </ul>
+                <button class="button" id="form-open">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Home -->
+        <section class="home">
+            <div class="form_container">
+                <i class="uil uil-times form_close"></i>
+                <!-- Login Form -->
+                <div class="form profile_form">
+                    <form action="#">
+                        <h2>Profile Information</h2>
+                         <div class="input_box">
+                            <input type="Full name" placeholder="Enter Full Name" required/>
+                            <i class="uil uil-user email"></i>
+                        </div>
+                        <div class="input_box">
+                            <input type="Address 1" placeholder="Enter Address1" required/>
+                            <i class="uil uil-home email"></i>
+                        </div>
+                        <div class="input_box">
+                            <input type="Address 2" placeholder="Enter Address2" required/>
+                            <i class="uil uil-home email"></i>
+                        </div>
+                        <div class="input_box">
+                            <input type="city" placeholder="Enter City" required/>
+                            <i class="uil uil-building email"></i>
+                        </div>
+                        <div class="input_box">
+                            <input type="state" placeholder="Enter State" required/>
+                            <i class="uil uil-map-marker-alt email"></i>
+                        </div>
+                        <div class="input_box">
+                            <input type="zipcode" placeholder="Enter Zipcode" required/>
+                            <i class="uil uil-map-pin-alt email"></i>
+                        </div>        
+                        <button class="button">Create Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>
