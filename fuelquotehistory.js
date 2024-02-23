@@ -1,8 +1,7 @@
 // storing quote history
-var fuelquoteHistory = [];
+var fuelquoteHistory = JSON.parse(localStorage.getItem('fuelquoteHistory')) || [];
 
 function calculateTotal() {
-    
     var gallonsRequested = document.getElementById('gallonsRequested').value;
     var pricePerGallon = document.getElementById('suggestedPrice').value;
     var totalAmountDue = gallonsRequested * pricePerGallon;
@@ -14,14 +13,19 @@ function calculateTotal() {
         totalAmountDue: totalAmountDue.toFixed(2)
     });
 
+    localStorage.setItem('fuelquoteHistory', JSON.stringify(fuelquoteHistory));
+
     updateQuoteHistory();
 }
+
 function updateQuoteHistory() {
-    var historyDiv = document.getElementById('quoteHistory');
-    historyDiv.innerHTML = ''; 
+    var historyTable = document.getElementById('quoteHistory');
+    // Clear  table
+    historyTable.innerHTML = '<tr><th>Gallons Requested</th><th>Price Per Gallon</th><th>Total Amount Due</th></tr>'; 
     for (var i = 0; i < fuelquoteHistory.length; i++) {
-        var quote = quoteHistory[i];
-        historyDiv.innerHTML += '<p>Gallons Requested: ' + quote.gallonsRequested + ', Price Per Gallon: ' + quote.pricePerGallon + ', Total Amount Due: ' + quote.totalAmountDue + '</p>';
+        var quote = fuelquoteHistory[i];
+        historyTable.innerHTML += '<tr><td>' + quote.gallonsRequested + '</td><td>' + quote.pricePerGallon + '</td><td>' + quote.totalAmountDue + '</td></tr>';
     } 
 }
+
 
