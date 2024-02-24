@@ -1,5 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', sans-serif; /* Updated font family */
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', sans-serif; /* Ensuring consistency in font usage */
 }
 
 .form-container {
@@ -7,6 +14,9 @@ body {
     margin: 20px auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #000000; /* Added border style */
+    border-radius: 6px; /* Added border radius */
+    background-color: #018749; /* Updated background color to match the header */
 }
 
 .form-group {
@@ -16,15 +26,28 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 5px;
+    color: #d9d9d9; /* Updated text color for better contrast */
 }
 
 .form-group input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+    background-color: #d9d9d9; /* Light background for input */
+    border: none; /* Removing the default border */
+    border-bottom: 1.5px solid #aaaaaa; /* Adding a subtle border to the bottom */
 }
 
 button {
     padding: 10px 20px;
     cursor: pointer;
+    background: transparent; /* Making button background transparent */
+    border: 2px solid #000000; /* Adding border to match the form container */
+    border-radius: 6px; /* Rounded corners for the button */
+    color: #000000; /* Text color */
+}
+
+button:hover {
+    background-color: #d9d9d9; /* Hover effect for the button */
+    transform: scale(1.1); /* Slightly enlarge button on hover */
 }
