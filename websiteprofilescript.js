@@ -31,4 +31,3 @@ const formOpenBtn = document.querySelector("#form-open"),
         e.preventDefault();
         form_container.classList.remove("active");
     });
-
