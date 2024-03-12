@@ -29,7 +29,7 @@ const Home = () => {
                         <div className="mb-4 flex items-center">
                             <input type="checkbox" id="check" className="mr-2"/>
                             <label htmlFor="check">Remember me</label>
-                            <a href="#" className="ml-auto text-sm text-blue-500 hover:underline">Forgot password?</a>
+                            <button className="ml-auto text-sm text-blue-500 hover:underline">Forgot password?</button>
                         </div>
                         <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Login Now</button>
                     </form>
