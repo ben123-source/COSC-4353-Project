@@ -1,20 +1,23 @@
+import React, { useState } from 'react';
 import Navbar from "../components/HomeNavbar";
+import axios from 'axios';
 
-const Home = () => {
+const Home = () => { 
     return (
         <div>
             <Navbar />
             <h1 className="text-center text-3xl mt-8">Home page where users will log in</h1>
             <div className="flex justify-center mt-8">
                 <div className="w-96 p-4 border border-black rounded-lg bg-white flex">
-                    {/* Login Form */}
-                    <form className="w-1/2 mr-2">
+                    <form className="w-1/2 mr-2" onSubmit={login}>
                         <h2 className="text-lg font-semibold mb-4">Login</h2>
                         <div className="mb-4">
                             <input
                                 type="text"
                                 placeholder="Enter your username"
                                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
                         </div>
@@ -23,6 +26,8 @@ const Home = () => {
                                 type="password"
                                 placeholder="Enter your password"
                                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-black"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </div>
@@ -31,7 +36,7 @@ const Home = () => {
                             <label htmlFor="check">Remember me</label>
                             <button className="ml-auto text-sm text-blue-500 hover:underline">Forgot password?</button>
                         </div>
-                        <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Login Now</button>
+                        <button type="submit" className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Login Now</button>
                     </form>
                     {/* Signup Form */}
                     <form className="w-1/2 ml-2">
