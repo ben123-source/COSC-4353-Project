@@ -41,7 +41,20 @@ app.post('/login', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3001;
+app.post('/signup', (req, res) => {
+    const { username, password } = req.body;
+    const sql = "INSERT INTO loginfor4353 (username, pass) VALUES (?, ?)";
+    db.query(sql, [username, password], (err, result) => {
+        if (err) {
+            console.error('Error inserting into database:', err);
+            return res.status(500).json('Internal server error');
+        }
+        console.log('User signed up successfully');
+        return res.json('Signup success');
+    });
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
