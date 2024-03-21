@@ -1,10 +1,11 @@
-const express = require('express');
-const mysql = require("mysql");
-const cors = require('cors');
+import express from 'express';
+import mysql from 'mysql';
+import cors from 'cors';
 
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
 const zoodatabase = 'zoodatabase';
 
@@ -40,7 +41,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });

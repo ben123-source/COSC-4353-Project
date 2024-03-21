@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/HomeNavbar";
+import Navbar from "../components/HomeNavbar.js";
 
 const Fuel = () => {
     return (

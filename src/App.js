@@ -1,6 +1,6 @@
 import React from "react";
-import Home from "./pages/Home";
-import Fuel from "./pages/Fuel";
+import Home from "./pages/Home.js";
+import Fuel from "./pages/Fuel.js";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const App = () => {
