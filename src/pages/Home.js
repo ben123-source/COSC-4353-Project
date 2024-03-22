@@ -17,7 +17,20 @@ const Home = () => {
             const response = await axios.post('/login', { username: loginUsername, password: loginPassword });
             if (response.data === 'Login success') {
                 console.log('Login successful'); // Log the message
-                navigate('/Fuel');
+                navigate('/fuelformpage');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/signup', { username: signupUsername, password: signupPassword });
+            if (response.data === 'Signup success') {
+                console.log('Signup successful');
+                navigate('/fuelformpage');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -55,7 +68,7 @@ const Home = () => {
                         </div>
                         <button type="submit" className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Login Now</button>
                     </form>
-                    <form className="w-1/2 ml-2">
+                    <form className="w-1/2 ml-2" onSubmit={handleSignup}>
                         <h2 className="text-lg font-semibold mb-4">Sign Up</h2>
                         <div className="mb-4">
                             <input
@@ -87,7 +100,7 @@ const Home = () => {
                                 required
                             />
                         </div>
-                        <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Sign Up Now</button>
+                        <button type="submit" className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300">Sign Up Now</button>
                     </form>
                 </div>
             </div>
