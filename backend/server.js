@@ -1,10 +1,11 @@
-const express = require('express');
-const mysql = require("mysql");
-const cors = require('cors');
+import express from 'express';
+import mysql from 'mysql';
+import cors from 'cors';
 
 const app = express();
 
 app.use(cors());
+
 app.use(express.json());
 const zoodatabase = 'zoodatabase';
 
@@ -37,6 +38,19 @@ app.post('/login', (req, res) => {
         } else {
             return res.status(401).json('Invalid credentials');
         }
+    });
+});
+
+app.post('/signup', (req, res) => {
+    const { username, password } = req.body;
+    const sql = "INSERT INTO loginfor4353 (username, pass) VALUES (?, ?)";
+    db.query(sql, [username, password], (err, result) => {
+        if (err) {
+            console.error('Error inserting into database:', err);
+            return res.status(500).json('Internal server error');
+        }
+        console.log('User signed up successfully');
+        return res.json('Signup success');
     });
 });
 
