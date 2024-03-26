@@ -7,6 +7,7 @@ const Signup = () =>{
     const [signupUsername, setSignupUsername] = useState('');
     const [signupPassword, setSignupPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const baseURL = process.env.REACT_APP_BACKEND_URL;
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {

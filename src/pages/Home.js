@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
-    
+    const baseURL = process.env.REACT_APP_BACKEND_URL; // Use environment variable for baseURL
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
