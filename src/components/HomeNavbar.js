@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div className='flex items-center justify-center gap-4 mr-6'>
                     <ul className='flex gap-6 mr-4'>
                         <button onClick={() => navigate("/")} className='hover:underline-dashed text-black hover:cursor-pointer'>Home</button>
-                        <button onClick={() => navigate("/fuelformpage")} className='hover:underline-dashed text-black hover:cursor-pointer'>FuelFormPage</button>
+                        <button onClick={() => navigate("/signup")} className='hover:underline-dashed text-black hover:cursor-pointer'>Signup</button>
                     </ul>
                 </div>
             </div>
