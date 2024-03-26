@@ -3,7 +3,6 @@ import mysql from 'mysql';
 import cors from 'cors';
 
 const app = express();
-const cors = require('cors')
 app.use(cors({
     origin: 'https://main--cosc4353.netlify.app'
 }));
