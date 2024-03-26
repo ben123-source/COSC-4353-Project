@@ -11,7 +11,7 @@ const Home = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`/login`, { username: loginUsername, password: loginPassword });
+            const response = await axios.post(`https://cosc4353.netlify.app/login`, { username: loginUsername, password: loginPassword });
             if (response.data === 'Login success') {
                 console.log('Login successful'); // Log the message
                 navigate('/fuelformpage');

@@ -12,7 +12,7 @@ const Signup = () =>{
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`/signup`, { username: signupUsername, password: signupPassword });
+            const response = await axios.post(`https://cosc4353.netlify.app/signup`, { username: signupUsername, password: signupPassword });
             if (response.data === 'Signup success') {
                 console.log('Signup successful');
                 navigate('/');
