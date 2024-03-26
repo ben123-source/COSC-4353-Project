@@ -3,8 +3,10 @@ import mysql from 'mysql';
 import cors from 'cors';
 
 const app = express();
-
-app.use(cors());
+const cors = require('cors')
+app.use(cors({
+    origin: 'https://main--cosc4353.netlify.app'
+}));
 
 app.use(express.json());
 const zoodatabase = 'zoodatabase';
