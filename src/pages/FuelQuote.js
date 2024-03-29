@@ -8,7 +8,7 @@ const FuelQuoteHistory = () => {
 
   useEffect(() => {
     
-    axios.get('http://localhost:3000/api/fuelQuotes')
+    axios.get('https://cosc-4353-project.onrender.com/fuelQuotes')
       .then(response => {
         setQuoteHistory(response.data);
       })
