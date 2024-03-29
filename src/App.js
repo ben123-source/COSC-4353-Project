@@ -14,7 +14,7 @@ const App = () => {
                 <Route path="/fuelformpage" element={<Fuel />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/fuelQuotes" element={<FuelQuoteHistory />} />
-                <Route path="/profilepage" element={<FuelQuoteHistory />} />
+                <Route path="/profilepage" element={<Profile />} />
 
             </Routes>
         </BrowserRouter>
