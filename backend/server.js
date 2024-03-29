@@ -7,7 +7,7 @@ const corsOptions = {
     origin: 'https://main--cosc4353.netlify.app/', // Adjust this to your React app's origin
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 const zoodatabase = 'zoodatabase';
@@ -28,7 +28,7 @@ db.connect((err) => {
     }
 });
 
-app.post('/login', (req, res) => {
+app.post('/', (req, res) => {
     const { username, password } = req.body;
     const sql = "SELECT * FROM loginfor4353 WHERE username = ? AND pass = ?";
     db.query(sql, [username, password], (err, data) => {
