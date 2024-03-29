@@ -55,6 +55,20 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/profilepage', (req, res) => {
+    const {fullName, address1, address2, city, state, zipcode} = req.body;
+    const sql = "INSERT INTO profile (fullname, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(sql, [fullname, address1, address2,city,state,zipcode], (err, result) => {
+        if (err) {
+            console.error('Error inserting into database:', err);
+            return res.status(500).json('Internal server error');
+        }
+        console.log('Profile created successfully');
+        return res.json('Your profile has been saved successfully!');
+    });
+});
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
