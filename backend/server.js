@@ -3,9 +3,8 @@ import mysql from 'mysql';
 import cors from 'cors';
 
 const app = express();
-app.use(cors({
-    origin: 'https://main--cosc4353.netlify.app'
-}));
+ app.use(cors());
+
 
 app.use(express.json());
 const zoodatabase = 'zoodatabase';
@@ -55,10 +54,10 @@ app.post('/signup', (req, res) => {
     });
 });
 
-app.post('/profilepage', (req, res) => {
+app.put('/profilepage', (req, res) => {
     const {fullName, address1, address2, city, state, zipcode} = req.body;
     const sql = "INSERT INTO profile (fullname, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?)";
-    db.query(sql, [fullname, address1, address2,city,state,zipcode], (err, result) => {
+    db.query(sql, [fullName, address1, address2,city,state,zipcode], (err, result) => {
         if (err) {
             console.error('Error inserting into database:', err);
             return res.status(500).json('Internal server error');
