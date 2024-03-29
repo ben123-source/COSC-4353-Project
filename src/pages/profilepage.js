@@ -13,7 +13,7 @@ const Profile = () => {
     const handleSaveProfile =async e=>{
         e.preventDefault()
         try{
-            const response = await axios.post("hhttps://cosc-4353-project.onrender.com/profilepage", {
+            const response = await axios.post("https://cosc-4353-project.onrender.com/profilepage", {
                 fullName: fullName, 
                 address1: address1,
                 address2: address2,
