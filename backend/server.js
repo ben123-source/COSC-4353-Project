@@ -1,12 +1,11 @@
 import express from 'express';
 import mysql from 'mysql';
-import cors from 'cors';
 
 const app = express();
 
 const cors = require('cors')
 const corsOptions = {
-    origin: 'https://cosc4353.netlify.app', // Adjust this to your React app's origin
+    origin: 'https://main--cosc4353.netlify.app/', // Adjust this to your React app's origin
 };
 
 app.use(cors(corsOptions));
