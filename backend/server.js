@@ -54,7 +54,7 @@ app.post('/signup', (req, res) => {
     });
 });
 
-app.put('/profilepage', (req, res) => {
+app.post('/profilepage', (req, res) => {
     const {fullName, address1, address2, city, state, zipcode} = req.body;
     const sql = "INSERT INTO profile (fullname, address1, address2, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?)";
     db.query(sql, [fullName, address1, address2,city,state,zipcode], (err, result) => {
