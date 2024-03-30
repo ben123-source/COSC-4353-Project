@@ -21,6 +21,7 @@ describe('Profile Page Endpoint', () => {
 
     // Assertions to check if the response is as expected
     expect(response.statusCode).toBe(200); // Assuming 200 is the success status code
-    expect(response.body).toEqual('Your profile has been saved successfully!');
+    expect(response.text).toEqual('\"Your profile has been saved successfully!\"');
+
   });
 });

@@ -63,6 +63,7 @@ app.post('/profilepage', (req, res) => {
     db.query(sql, [fullName, address1, address2,city,state,zipcode], (err, result) => {
         if (err) {
             console.error('Error inserting into database:', err);
+            return res.status(500).json({ error: 'Internal server error' });
         }
         console.log('Profile created successfully');
         return res.json('Your profile has been saved successfully!');
@@ -70,7 +71,7 @@ app.post('/profilepage', (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3006;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
