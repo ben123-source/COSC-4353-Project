@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
-const Home = ({ setIsLoggedIn }) => { // Receive setIsLoggedIn as a prop
+const Home = ({ setIsLoggedIn }) => {
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigate = useNavigate();
@@ -11,7 +11,8 @@ const Home = ({ setIsLoggedIn }) => { // Receive setIsLoggedIn as a prop
         e.preventDefault();
         try {
             const response = await axios.post(`https://cosc-4353-project.onrender.com/`, { username: loginUsername, password: loginPassword });
-            if (response.data.token) { // Assuming your server sends back a token
+            console.log('Response:', response.data); // Log the response data
+            if (response.data === 'Login success') {
                 localStorage.setItem('token', response.data.token);
                 setIsLoggedIn(true); // Update login state
                 console.log('Login successful');
@@ -21,7 +22,6 @@ const Home = ({ setIsLoggedIn }) => { // Receive setIsLoggedIn as a prop
             console.error('Error:', error);
         }
     };
-    
 
     
 

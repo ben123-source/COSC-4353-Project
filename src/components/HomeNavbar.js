@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
-const Navbar = () => {
+
+const Navbar = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
-
+  
     const handleLogout = () => {
-        localStorage.removeItem('token'); 
-        navigate('/ '); 
+      localStorage.removeItem('token'); 
+      setIsLoggedIn(false);
+      navigate('/ '); 
     };
+  
 
     return(
         <div>
