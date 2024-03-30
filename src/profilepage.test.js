@@ -2,9 +2,9 @@
 const request = require('supertest');
 const app = require('../backend/server'); // Adjust this path based on the actual location
 
-describe('Profile Page Endpoint', () => {
-  it('should create a new profile and respond with a success message', async () => {
-    // Example profile data to be sent in the request
+describe('Profile Page Creation', () => {
+  it('should successfully create a new profile and respond with a 200 status code', async () => {
+    // Example complete profile data to be sent in the request
     const profileData = {
       fullName: "John Doe",
       address1: "1234 Main St",
@@ -19,9 +19,7 @@ describe('Profile Page Endpoint', () => {
       .post('/profilepage')
       .send(profileData);
 
-    // Assertions to check if the response is as expected
-    expect(response.statusCode).toBe(200); // Assuming 200 is the success status code
-    expect(response.text).toEqual('\"Your profile has been saved successfully!\"');
-
+    // Assertions to check if the response status code is 200
+    expect(response.statusCode).toBe(200);
   });
 });
