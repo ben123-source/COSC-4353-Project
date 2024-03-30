@@ -1,7 +1,6 @@
 // Import necessary modules
 const request = require('supertest');
-const app = require('../backend/server'); // Adjust this path based on the actual location
-
+import app from '../backend/server.js'; 
 describe('Profile Page Creation', () => {
   it('should successfully create a new profile and respond with a 200 status code', async () => {
     // Example complete profile data to be sent in the request
