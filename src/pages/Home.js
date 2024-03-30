@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from "../components/HomeNavbar.js";
+import NavbarLO from "../components/loggedoutNavbar.js";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -21,9 +21,11 @@ const Home = () => {
         }
     };
 
+    
+
     return (
         <div>
-            <Navbar />
+            <NavbarLO />
             <h1 className="text-center text-3xl mt-8">Home page where users will log in</h1>
             <div className="flex justify-center mt-8">
                 <div className="w-96 p-4 border border-black rounded-lg bg-white flex">
