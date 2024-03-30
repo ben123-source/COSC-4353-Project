@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import NavbarLO from "../components/loggedoutNavbar.js";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
-const Home = () => {
+const Home = ({ setIsLoggedIn }) => { // Receive setIsLoggedIn as a prop
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigate = useNavigate();
@@ -12,20 +11,23 @@ const Home = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`https://cosc-4353-project.onrender.com/`, { username: loginUsername, password: loginPassword });
-            if (response.data === 'Login success') {
-                console.log('Login successful'); // Log the message
+            if (response.data.token) { // Assuming your server sends back a token
+                localStorage.setItem('token', response.data.token);
+                setIsLoggedIn(true); // Update login state
+                console.log('Login successful');
                 navigate('/fuelformpage');
             }
         } catch (error) {
             console.error('Error:', error);
         }
     };
+    
 
     
 
     return (
         <div>
-            <NavbarLO />
+            
             <h1 className="text-center text-3xl mt-8">Home page where users will log in</h1>
             <div className="flex justify-center mt-8">
                 <div className="w-96 p-4 border border-black rounded-lg bg-white flex">

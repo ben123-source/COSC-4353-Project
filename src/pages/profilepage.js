@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from "../components/HomeNavbar.js";
 import axios from 'axios';
 
 const Profile = () => {
@@ -68,7 +67,6 @@ const Profile = () => {
 
     return (
         <div>
-            <Navbar />
             <section className="flex justify-center items-center h-screen">
                 {/* Profile Information Form */}
                 <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

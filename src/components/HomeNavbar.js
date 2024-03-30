@@ -5,7 +5,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token'); 
-        navigate('/login'); 
+        navigate('/ '); 
     };
 
     return(
@@ -16,8 +16,6 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center justify-center gap-4 mr-6'>
                     <ul className='flex gap-6 mr-4'>
-                        <button onClick={() => navigate("/")} className='hover:underline-dashed text-black hover:cursor-pointer'>Home</button>
-                        <button onClick={() => navigate("/signup")} className='hover:underline-dashed text-black hover:cursor-pointer'>Signup</button>
                         <button onClick={() => navigate("/fuelQuotes")} className='hover:underline-dashed text-black hover:cursor-pointer'>FuelQuoteHistory</button>
                         <button onClick={() => navigate("/profilepage")} className='hover:underline-dashed text-black hover:cursor-pointer'>profilepage</button>
                         <button onClick={handleLogout} className='hover:underline-dashed text-black hover:cursor-pointer'>Logout</button>

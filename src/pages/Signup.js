@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from "../components/HomeNavbar.js";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -23,7 +22,6 @@ const Signup = () =>{
     };
     return(
         <div>
-            <Navbar />
             <form className="w-1/2 ml-2" onSubmit={handleSignup}>
                         <h2 className="text-lg font-semibold mb-4">Sign Up</h2>
                         <div className="mb-4">

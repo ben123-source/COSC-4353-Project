@@ -1,10 +1,8 @@
 import React from "react";
-import Navbar from "../components/HomeNavbar.js";
 
 const Fuel = () => {
     return (
         <div>
-            <Navbar />
             <section className="flex justify-center items-center h-screen">
                 {/* Fuel Quote Form */}
                 <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

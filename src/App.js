@@ -4,8 +4,8 @@ import Fuel from "./pages/Fuel.js";
 import Signup from "./pages/Signup.js";
 import FuelQuoteHistory from "./pages/FuelQuote.js";
 import Profile from "./pages/profilepage.js";
-import Navbar from "../components/HomeNavbar";
-import NavbarLO from "../components/loggedoutNavbar";
+import Navbar from "./components/HomeNavbar.js";
+import NavbarLO from "./components/loggedoutNavbar.js";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //test commit
@@ -18,18 +18,18 @@ const App = () => {
   };
   return (
     <BrowserRouter>
-          {isLoggedIn ? <Navbar handleLogout={handleLogout} /> : <NavbarLO />}
-
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/fuelformpage" element={<Fuel />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/fuelQuotes" element={<FuelQuoteHistory />} />
-                <Route path="/profilepage" element={<Profile />} />
-
-            </Routes>
-        </BrowserRouter>
+      {isLoggedIn ? <Navbar handleLogout={handleLogout} /> : <NavbarLO />}
+      <Routes>
+        <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} />} />
+        {/* Pass setIsLoggedIn as a prop to the Home component */}
+        <Route path="/fuelformpage" element={<Fuel />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/fuelQuotes" element={<FuelQuoteHistory />} />
+        <Route path="/profilepage" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
+
 
 export default App;
