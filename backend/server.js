@@ -13,10 +13,10 @@ app.use(express.json());
 const zoodatabase = 'zoodatabase';
 
 const db = mysql.createConnection({
-    host: 'zoodatabase.mysql.database.azure.com',
-    user: 'team4',
-    password: 'Zooproject1',
-    database: "zoodatabase"
+    host: 'mysql-fq-windycityrocks23-9347.b.aivencloud.com',
+    user: 'avnadmin',
+    password: 'AVNS_vRlDd-GKH3R2kXgbWlt',
+    database: "fuelquotadb"
 });
 
 
