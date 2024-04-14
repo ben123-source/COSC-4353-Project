@@ -11,7 +11,7 @@ const Signup = () =>{
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`https://cosc-4353-project.onrender.com/signup`, { username: signupUsername, password: signupPassword });
+            const response = await axios.post(`http://localhost:4000/signup`, { username: signupUsername, password: signupPassword });
             if (response.data === 'Signup success') {
                 console.log('Signup successful');
                 navigate('/');

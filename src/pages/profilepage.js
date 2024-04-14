@@ -51,7 +51,7 @@ const Profile = () => {
         }
 
         try {
-            const response = await axios.post("https://cosc-4353-project.onrender.com/profilepage", {
+            const response = await axios.post("http://localhost:3000/profilepage", {
                 fullName, 
                 address1,
                 address2,
