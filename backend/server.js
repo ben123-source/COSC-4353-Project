@@ -11,8 +11,8 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  port: 3306,
-  password: '26dosis123',
+  port: 3307,
+  password: 'password',
   database: 'fuelquotadb'
 });
 
@@ -147,6 +147,7 @@ app.post('/fuelformpage', async (req, res) => {
   // Constants
   const currentPricePerGallon = 1.50;
   const companyProfitFactor = 0.10;
+  const discountPercentage = 0.01; // 1 percent discount
 
   // Input validation
   if (!gallonsRequested || !deliveryState || !userId || !deliveryAddress || !deliveryCity || !deliveryZipcode || !deliveryDate) {
@@ -157,7 +158,7 @@ app.post('/fuelformpage', async (req, res) => {
     // Check for rate history
     const historySql = "SELECT EXISTS(SELECT 1 FROM fuel_quotes WHERE _id = ?) as hasHistory";
     const [historyResult] = await db.promise().query(historySql, [userId]);
-    const rateHistoryFactor = historyResult[0].hasHistory ? 0.01 : 0.00;
+    const rateHistoryFactor = historyResult[0].hasHistory ? discountPercentage : 0.00;
 
     // Location Factor
     const locationFactor = deliveryState === 'TX' ? 0.02 : 0.04;
@@ -172,7 +173,14 @@ app.post('/fuelformpage', async (req, res) => {
     const suggestedPrice = (currentPricePerGallon + margin).toFixed(4); // Rounded to 4 decimal places
 
     // Calculate Total Amount Due
-    const totalAmountDue = (gallonsRequested * suggestedPrice).toFixed(2); // Rounded to 2 decimal places
+    let totalAmountDue = gallonsRequested * suggestedPrice;
+
+    // Apply discount if not the first quote
+    if (rateHistoryFactor > 0) {
+      totalAmountDue -= totalAmountDue * discountPercentage; // Apply discount
+    }
+
+    totalAmountDue = totalAmountDue.toFixed(2); // Rounded to 2 decimal places
 
     // Insert quote details into the database
     const insertSql = `
