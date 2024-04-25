@@ -19,7 +19,7 @@ const Home = ({ setIsLoggedIn }) => {
         localStorage.setItem('userId', response.data.userId); // Store user ID in local storage
         setIsLoggedIn(true); 
         console.log('Login successful');
-        navigate('/profilepage'); // Navigate to the profile route
+        navigate('/profilepage/${userId}'); // Navigate to the profile route
       }
     } catch (error) {
       console.error('Error:', error.response?.data || error.message);

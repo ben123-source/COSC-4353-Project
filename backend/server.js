@@ -1,6 +1,8 @@
 import express from 'express';
 import mysql from 'mysql2';
 import cors from 'cors';
+import bcrypt from 'bcrypt';
+
 const app = express();
 
 app.use(cors());
@@ -10,7 +12,7 @@ const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
   port: 3306,
-  password: 'Berlin123',
+  password: '26dosis123',
   database: 'fuelquotadb'
 });
 
@@ -23,32 +25,50 @@ db.connect((err) => {
 });
 
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const sql = "SELECT _id FROM user WHERE username = ? AND password = ?";
-    db.query(sql, [username, password], (err, data) => {
-      if (err) {
-        console.error('Error querying database:', err);
-        return res.status(500).json('Internal server error');
-      }
-      if (data.length > 0) {
-        // Send back the user ID upon successful login
-        return res.json({ message: 'Login success', userId: data[0]._id });
-      } else {
-        return res.status(401).json('Invalid credentials');
-      }
-    });
+  const { username, password } = req.body;
+  const sql = "SELECT _id, password FROM user WHERE username = ?";
+  db.query(sql, [username], (err, data) => {
+    if (err) {
+      console.error('Error querying database:', err);
+      return res.status(500).json('Internal server error');
+    }
+    if (data.length > 0) {
+      // Compare the hashed password
+      bcrypt.compare(password, data[0].password, function(err, result) {
+        if (result) {
+          // Send back the user ID upon successful login
+          return res.json({ message: 'Login success', userId: data[0]._id });
+        } else {
+          return res.status(401).json('Invalid credentials');
+        }
+      });
+    } else {
+      return res.status(401).json('Invalid credentials');
+    }
   });
+});
+
+const saltRounds = 10; // for bcrypt password hashing
 
 app.post('/signup', (req, res) => {
   const { username, password } = req.body;
-  const sql = "INSERT INTO user (username, password) VALUES (?, ?)";
-  db.query(sql, [username, password], (err, result) => {
+  
+  // Generate a salt and hash the password
+  bcrypt.hash(password, saltRounds, function(err, hash) {
     if (err) {
-      console.error('Error inserting into database:', err);
+      console.error('Error hashing password:', err);
       return res.status(500).json('Internal server error');
     }
-    console.log('User signed up successfully');
-    return res.json('Signup success');
+    // Store hash in your password DB.
+    const sql = "INSERT INTO user (username, password) VALUES (?, ?)";
+    db.query(sql, [username, hash], (err, result) => {
+      if (err) {
+        console.error('Error inserting into database:', err);
+        return res.status(500).json('Internal server error');
+      }
+      console.log('User signed up successfully');
+      return res.json('Signup success');
+    });
   });
 });
 
