@@ -23,8 +23,8 @@ const App = () => {
         <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/fuelformpage" element={<Fuel />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/fuelQuotes" element={<FuelQuoteHistory />} />
-        <Route path="/profilepage" element={<Profile />} />
+        <Route path="/fuelQuotes/:userId" element={<FuelQuoteHistory />} />
+        <Route path="/profilepage/:id" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

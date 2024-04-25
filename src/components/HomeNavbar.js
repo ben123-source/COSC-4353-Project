@@ -1,34 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
-
 const Navbar = ({ setIsLoggedIn }) => {
-    const navigate = useNavigate();
-  
-    const handleLogout = () => {
-      localStorage.removeItem('token'); 
-      setIsLoggedIn(false);
-      navigate('/ '); 
-    };
-  
+  const navigate = useNavigate();
 
-    return(
-        <div>
-            <div className='bg-[green] w-screen h-14 flex justify-between items-center'>
-                <div className='flex items-center h-full ml-2'>
-                    <button onClick={() => navigate("/")} className='hover:underline-dashed text-black hover:cursor-pointer ml-3'>CompanyTitle</button>
-                </div>
-                <div className='flex items-center justify-center gap-4 mr-6'>
-                    <ul className='flex gap-6 mr-4'>
-                        <button onClick={() => navigate("/fuelQuotes")} className='hover:underline-dashed text-black hover:cursor-pointer'>FuelQuoteHistory</button>
-                        <button onClick={() => navigate("/profilepage")} className='hover:underline-dashed text-black hover:cursor-pointer'>profilepage</button>
-                        <button onClick={handleLogout} className='hover:underline-dashed text-black hover:cursor-pointer'>Logout</button>
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId'); // Remove the user ID as well
+    setIsLoggedIn(false);
+    navigate('/'); // Navigate to home page after logout
+  };
 
-                    </ul>
-                </div>
-            </div>
-        </div>
-    )
-}
+  // Function to navigate to profile page
+  const goToProfile = () => {
+    const userId = localStorage.getItem('userId'); // Get user ID from local storage
+    if(userId) {
+      navigate(`/profilepage/${userId}`); // Navigate to profile page with user ID
+    } else {
+      console.error('No user ID found');
+      // Handle error, e.g., navigate to login page or show a message
+    }
+  };
+  const goToFuelQuoteHistory = () => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      navigate(`/fuelQuotes/${userId}`);
+    } else {
+      console.error('No user ID found');
+    }
+  };
+
+  return (
+    <div className="bg-green-500 w-screen h-14 flex justify-between items-center px-3">
+      <button onClick={() => navigate("/")} className="text-white hover:underline">
+        CompanyTitle
+      </button>
+      <ul className="flex gap-4">
+        <button onClick={() => navigate("/fuelformpage")} className="text-white hover:underline">
+          FuelQuoteCalculator
+        </button>
+        <button onClick={goToFuelQuoteHistory} className="text-white hover:underline">
+          FuelQuoteHistory
+        </button>
+        <button onClick={goToProfile} className="text-white hover:underline">
+          Profile
+        </button>
+        <button onClick={handleLogout} className="text-white hover:underline">
+          Logout
+        </button>
+      </ul>
+    </div>
+  );
+};
 
 export default Navbar;
