@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'; // Import the useParams hook
 
 const FuelQuoteHistory = () => {
   const [quoteHistory, setQuoteHistory] = useState([]);
+  const { userId } = useParams(); // Get the userId from the URL params
 
   useEffect(() => {
     const fetchQuoteHistory = async () => {
-      const userId = localStorage.getItem('userId');
       if (!userId) {
-        console.error('User is not logged in.');
+        console.error('User ID is missing.');
         return;
       }
 
@@ -21,7 +22,7 @@ const FuelQuoteHistory = () => {
     };
 
     fetchQuoteHistory();
-  }, []);
+  }, [userId]);
 
   return (
     <div>

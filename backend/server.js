@@ -102,7 +102,8 @@ app.post('/profilepage', (req, res) => {
   });
 });
 app.get('/profilepage/:userId', (req, res) => {
-  const userId = req.params.userId;
+  const { userId } = req.params;
+
 
   // Fetch profile data from the database
   const sql = "SELECT * FROM profile WHERE _id = ?";
@@ -197,10 +198,9 @@ app.post('/fuelformpage', async (req, res) => {
 app.get('/fuelQuotes/:userId', async (req, res) => {
   const { userId } = req.params;
   const historySql = "SELECT * FROM fuel_quotes WHERE _id = ? ORDER BY delivery_date DESC";
+  
   try {
-    const connection = await mysql.createConnection(dbConfig);
-    const [history] = await connection.query(historySql, [userId]);
-    connection.end();
+    const [history] = await db.promise().query(historySql, [userId]);
     res.json(history);
   } catch (err) {
     console.error('Error fetching quote history:', err);
