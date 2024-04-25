@@ -121,20 +121,20 @@ app.get('/profilepage/:userId', (req, res) => {
 });
 
 app.post('/fuelformpage', async (req, res) => {
-  const { gallonsRequested, deliveryState, userId, deliveryAddress1, deliveryCity, deliveryZipcode, deliveryDate } = req.body;
+  const { gallonsRequested, deliveryState, userId, deliveryAddress, deliveryCity, deliveryZipcode, deliveryDate } = req.body;
 
   // Constants
   const currentPricePerGallon = 1.50; // Fixed price per gallon
   const companyProfitFactor = 0.10; // Always 10%
 
   // Input validation
-  if (!gallonsRequested || !deliveryState || !userId || !deliveryAddress1 || !deliveryCity || !deliveryZipcode || !deliveryDate) {
+  if (!gallonsRequested || !deliveryState || !userId || !deliveryAddress || !deliveryCity || !deliveryZipcode || !deliveryDate) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
     // Check for rate history
-    const historySql = "SELECT EXISTS(SELECT 1 FROM fuel_quotes WHERE user_id = ?) as hasHistory";
+    const historySql = "SELECT EXISTS(SELECT 1 FROM fuel_quotes WHERE _id = ?) as hasHistory";
     const [historyResult] = await db.promise().query(historySql, [userId]);
     const rateHistoryFactor = historyResult[0].hasHistory ? 0.01 : 0.00;
 
@@ -154,8 +154,8 @@ app.post('/fuelformpage', async (req, res) => {
     const totalAmountDue = (gallonsRequested * suggestedPrice).toFixed(2); // Rounded to 2 decimal places
 
     // Insert quote details into the database
-    const insertSql = `INSERT INTO fuel_quotes (user_id, gallons_requested, delivery_address1, delivery_city, delivery_state, delivery_zipcode, delivery_date, suggested_price, total_amount_due) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    await db.promise().execute(insertSql, [userId, gallonsRequested, deliveryAddress1, deliveryCity, deliveryState, deliveryZipcode, deliveryDate, suggestedPrice, totalAmountDue]);
+    const insertSql = `INSERT INTO fuel_quotes (_id, gallons_requested, delivery_address, delivery_city, delivery_state, delivery_zipcode, delivery_date, suggested_price, total_amount_due) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    await db.promise().execute(insertSql, [userId, gallonsRequested, deliveryAddress, deliveryCity, deliveryState, deliveryZipcode, deliveryDate, suggestedPrice, totalAmountDue]);
 
     // Return the calculated prices
     res.json({ suggestedPrice, totalAmountDue });
@@ -163,17 +163,9 @@ app.post('/fuelformpage', async (req, res) => {
     console.error('Error processing fuel quote:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-  const insertSql = `INSERT INTO fuel_quotes (_id, gallons_requested, delivery_address, delivery_city, delivery_state, delivery_zipcode, delivery_date, suggested_price, total_amount_due) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-  try {
-    const connection = await mysql.createConnection(dbConfig);
-    await connection.execute(insertSql, [userId, gallonsRequested, deliveryAddress1, deliveryCity, deliveryState, deliveryZipcode, deliveryDate, suggestedPrice, totalAmountDue]);
-    connection.end();
-    res.json({ suggestedPrice, totalAmountDue });
-  } catch (err) {
-    console.error('Error processing fuel quote:', err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+  
 });
+
 
 app.get('/fuelQuotes/:userId', async (req, res) => {
   const { userId } = req.params;
