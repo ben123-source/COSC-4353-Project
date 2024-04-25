@@ -124,8 +124,8 @@ app.post('/fuelformpage', async (req, res) => {
   const { gallonsRequested, deliveryState, userId, deliveryAddress, deliveryCity, deliveryZipcode, deliveryDate } = req.body;
 
   // Constants
-  const currentPricePerGallon = 1.50; // Fixed price per gallon
-  const companyProfitFactor = 0.10; // Always 10%
+  const currentPricePerGallon = 1.50;
+  const companyProfitFactor = 0.10;
 
   // Input validation
   if (!gallonsRequested || !deliveryState || !userId || !deliveryAddress || !deliveryCity || !deliveryZipcode || !deliveryDate) {
@@ -154,17 +154,44 @@ app.post('/fuelformpage', async (req, res) => {
     const totalAmountDue = (gallonsRequested * suggestedPrice).toFixed(2); // Rounded to 2 decimal places
 
     // Insert quote details into the database
-    const insertSql = `INSERT INTO fuel_quotes (_id, gallons_requested, delivery_address, delivery_city, delivery_state, delivery_zipcode, delivery_date, suggested_price, total_amount_due) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    await db.promise().execute(insertSql, [userId, gallonsRequested, deliveryAddress, deliveryCity, deliveryState, deliveryZipcode, deliveryDate, suggestedPrice, totalAmountDue]);
+    const insertSql = `
+      INSERT INTO fuel_quotes (
+        _id,
+        gallons_requested,
+        delivery_address,
+        delivery_city,
+        delivery_state,
+        delivery_zipcode,
+        delivery_date,
+        suggested_price,
+        total_amount_due
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    await db.promise().execute(insertSql, [
+      userId,
+      gallonsRequested,
+      deliveryAddress,
+      deliveryCity,
+      deliveryState,
+      deliveryZipcode,
+      deliveryDate,
+      suggestedPrice,
+      totalAmountDue
+    ]);
 
-    // Return the calculated prices
-    res.json({ suggestedPrice, totalAmountDue });
+    // Return the calculated prices and a success message
+    res.json({
+      success: true,
+      message: "Quote created successfully",
+      suggestedPrice,
+      totalAmountDue
+    });
   } catch (err) {
     console.error('Error processing fuel quote:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
-  
 });
+
 
 
 app.get('/fuelQuotes/:userId', async (req, res) => {
