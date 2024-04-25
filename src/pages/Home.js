@@ -3,30 +3,32 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
 const Home = ({ setIsLoggedIn }) => {
-    const [loginUsername, setLoginUsername] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-    const navigate = useNavigate();
+  const [loginUsername, setLoginUsername] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:4000/login', { username: loginUsername, password: loginPassword });
-            console.log('Response:', response.data); // Log the response data
-            if (response.data === 'Login success') {
-                localStorage.setItem('token', response.data.token);
-                setIsLoggedIn(true); // Update login state
-                console.log('Login successful');
-                navigate('/fuelformpage');
-            }
-        } catch (error) {
-            console.error('Error:', error.message);
-        }
-    };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:4000/login', {
+        username: loginUsername,
+        password: loginPassword
+      });
+      console.log('Response:', response.data);
+      if (response.data.message === 'Login success') {
+        localStorage.setItem('userId', response.data.userId); // Store user ID in local storage
+        setIsLoggedIn(true); 
+        console.log('Login successful');
+        navigate('/profilepage'); // Navigate to the profile route
+      }
+    } catch (error) {
+      console.error('Error:', error.response?.data || error.message);
+    }
+  };
     
 
     return (
         <div>
-            
             <h1 className="text-center text-3xl mt-8">Home page where users will log in</h1>
             <div className="flex justify-center mt-8">
                 <div className="w-96 p-4 border border-black rounded-lg bg-white flex">
