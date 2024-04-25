@@ -11,14 +11,17 @@ const FuelQuoteHistory = () => {
         console.error('User is not logged in.');
         return;
       }
-
+    
       try {
         const response = await axios.get(`http://localhost:4000/fuelQuotes/${userId}`);
-        setQuoteHistory(response.data);
+        // Sort the quote history by quote ID
+        const sortedData = response.data.sort((a, b) => a.quote_id - b.quote_id);
+        setQuoteHistory(sortedData);
       } catch (err) {
         console.error('Error fetching quote history:', err);
       }
     };
+    
 
     fetchQuoteHistory();
   }, []);

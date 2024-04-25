@@ -29,7 +29,7 @@ const Home = ({ setIsLoggedIn }) => {
 
     return (
         <div>
-            <h1 className="text-center text-3xl mt-8">Home page where users will log in</h1>
+            <h1 className="text-center text-3xl mt-8">Welcome</h1>
             <div className="flex justify-center mt-8">
                 <div className="w-96 p-4 border border-black rounded-lg bg-white flex">
                     <form className="w-1/2 mr-2" onSubmit={handleLogin}>

@@ -6,21 +6,20 @@ const Navbar = ({ setIsLoggedIn }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('userId'); // Remove the user ID as well
+    localStorage.removeItem('userId');
     setIsLoggedIn(false);
-    navigate('/'); // Navigate to home page after logout
+    navigate('/');
   };
 
-  // Function to navigate to profile page
   const goToProfile = () => {
-    const userId = localStorage.getItem('userId'); // Get user ID from local storage
+    const userId = localStorage.getItem('userId');
     if(userId) {
-      navigate(`/profilepage/${userId}`); // Navigate to profile page with user ID
+      navigate(`/profilepage/${userId}`);
     } else {
       console.error('No user ID found');
-      // Handle error, e.g., navigate to login page or show a message
     }
   };
+
   const goToFuelQuoteHistory = () => {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -32,8 +31,8 @@ const Navbar = ({ setIsLoggedIn }) => {
 
   return (
     <div className="bg-green-500 w-screen h-14 flex justify-between items-center px-3">
-      <button onClick={() => navigate("/")} className="text-white hover:underline">
-        CompanyTitle
+      <button onClick={goToProfile} className="text-white hover:underline">
+        FueledUp
       </button>
       <ul className="flex gap-4">
         <button onClick={() => navigate("/fuelformpage")} className="text-white hover:underline">
