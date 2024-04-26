@@ -9,7 +9,7 @@ describe('Login Endpoint', () => {
       password: "123"
     };
     const response = await request(app)
-      .post('/login') // Make sure this matches your actual login route
+      .post('/login') 
       .send(loginCredentials);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(expect.objectContaining({
@@ -26,7 +26,7 @@ describe('Login Endpoint', () => {
     const response = await request(app)
       .post('/login')
       .send(wrongUsername);
-    expect(response.statusCode).toBe(401); // Assuming 401 for unauthorized
+    expect(response.statusCode).toBe(401); 
     expect(response.body).toEqual(expect.objectContaining({
       error: 'Invalid username or password'
     }));
@@ -41,7 +41,7 @@ describe('Login Endpoint', () => {
     const response = await request(app)
       .post('/login')
       .send(wrongPassword);
-    expect(response.statusCode).toBe(401); // Assuming 401 for unauthorized
+    expect(response.statusCode).toBe(401); 
     expect(response.body).toEqual(expect.objectContaining({
       error: 'Invalid username or password'
     }));
@@ -56,7 +56,7 @@ describe('Login Endpoint', () => {
     const response = await request(app)
       .post('/login')
       .send(missingInfo);
-    expect(response.statusCode).toBe(400); // Assuming 400 for bad request
+    expect(response.statusCode).toBe(400); 
     expect(response.body).toEqual(expect.objectContaining({
       error: 'Username and password are required'
     }));
