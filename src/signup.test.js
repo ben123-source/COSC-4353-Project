@@ -71,7 +71,6 @@ describe('Signup Endpoint', () => {
     const response = await request(app)
       .post('/signup')
       .send(userToTriggerServerError);
-    // Assuming your endpoint has a mechanism to simulate or trigger server errors for testing
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(expect.objectContaining({
       error: 'Unexpected server error'
