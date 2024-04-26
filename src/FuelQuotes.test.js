@@ -18,7 +18,6 @@ describe('Fuel Quote History Endpoint', () => {
           expect(firstQuote).toHaveProperty('suggestedPrice');
           expect(firstQuote).toHaveProperty('totalAmountDue');
           expect(firstQuote).toHaveProperty('gallonsRequested');
-          // Add more property checks as needed
         }
       });
   });
@@ -38,7 +37,7 @@ describe('Fuel Quote History Endpoint', () => {
   it('should return a 401 status if the user is not authenticated', async () => {
     await request(app)
       .get('/api/fuelQuotes') // Endpoint might require authentication
-      .expect(401); // Assuming 401 for unauthorized access
+      .expect(401); // 401 for unauthorized access
   });
 
   // Test for data format integrity
