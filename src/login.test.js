@@ -71,7 +71,6 @@ describe('Login Endpoint', () => {
     const response = await request(app)
       .post('/login')
       .send(credentialsToTriggerError);
-    // Assuming your endpoint has a way to simulate or trigger server errors for test purposes
     expect(response.statusCode).toBe(500);
     expect(response.body).toEqual(expect.objectContaining({
       error: 'Unexpected error occurred'
