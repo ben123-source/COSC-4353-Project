@@ -54,7 +54,6 @@ describe('Fuel Quote History Endpoint', () => {
           expect(typeof firstQuote.suggestedPrice).toBe('number');
           expect(typeof firstQuote.totalAmountDue).toBe('number');
           expect(typeof firstQuote.gallonsRequested).toBe('number');
-          // Add more type checks as needed
         }
       });
   });
