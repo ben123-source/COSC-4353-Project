@@ -77,7 +77,6 @@ describe('Profile Page Creation', () => {
     const response = await request(app)
       .post('/profilepage')
       .send(profileDataToTriggerServerError);
-    // Assuming your endpoint has a way to simulate or trigger server errors for test purposes
     expect(response.statusCode).toBe(500);
   });
 });
