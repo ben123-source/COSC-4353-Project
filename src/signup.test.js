@@ -51,7 +51,7 @@ describe('Signup Endpoint', () => {
   it('should respond with an error if the password does not meet the security criteria', async () => {
     const userWithWeakPassword = {
       username: "secureuser",
-      password: "123" // Assuming this is considered a weak password
+      password: "123" 
     };
     const response = await request(app)
       .post('/signup')
